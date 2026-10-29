@@ -5,7 +5,7 @@ import {mapWorkbenchView} from './map-workbench.js';
 import {mountTunnel} from './tunnel-three.js';
 import {mountArchiveFolders} from './archive-three.js';
 import {homeView,mountHomeMotion} from './home-view.js';
-import {getLinkPath,getLinkMidpoint} from './vendor/mirofish-graph-geometry.js';
+import {getLinkPath,getLinkMidpoint} from './mirofish-graph-geometry.js';
 
 const $=s=>document.querySelector(s);
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

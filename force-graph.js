@@ -4,7 +4,7 @@
  * The network visualises life events and their effects; animation is a layout,
  * not a live model simulation. All graph data remains in the browser.
  */
-import { getLinkPath, getLinkMidpoint } from './vendor/mirofish-graph-geometry.js';
+import { getLinkPath, getLinkMidpoint } from './mirofish-graph-geometry.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 const layouts = new Map();

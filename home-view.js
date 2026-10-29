@@ -7,7 +7,7 @@ export function homeView(){return `
 <section class="touch-opening" id="opening" aria-label="人手与机械手相向的开场">
 <div class="touch-aura" aria-hidden="true"></div>
 <div class="touch-copy"><span class="section-caption">branch / HUMAN CHOICES. POSSIBLE FUTURES.</span><h1>你的选择，<br><span>触碰未来。</span></h1><p>让尚未发生的人生，与你相遇。</p></div>
-<div class="touch-hands" aria-hidden="true"><div class="touch-hand touch-human"><img src="./assets/human-robot-hands.png" alt="" width="1536" height="1024" fetchpriority="high" draggable="false"></div><div class="touch-hand touch-robot"><img src="./assets/human-robot-hands.png" alt="" width="1536" height="1024" draggable="false"></div></div>
+<div class="touch-hands" aria-hidden="true"><div class="touch-hand touch-human"><img src="./human-robot-hands.png" alt="" width="1536" height="1024" fetchpriority="high" draggable="false"></div><div class="touch-hand touch-robot"><img src="./human-robot-hands.png" alt="" width="1536" height="1024" draggable="false"></div></div>
 <div class="touch-foot"><div><span class="section-caption">A CONNECTION TO ANOTHER YOU</span><p>从现在的自己，<br>伸向未来的另一种可能。</p><button class="touch-start" data-action="new">开启我的人生 <span>↗</span></button></div><a href="#possibility-tunnel" class="touch-scroll" aria-label="继续探索光影隧道">向下探索 <span>↓</span></a><div class="touch-controls"><span>HUMAN</span><i>↔</i><span>POSSIBILITY</span><button class="touch-motion" data-action="hands-pause" aria-label="暂停手部动画">Ⅱ</button></div></div>
 </section>
 <section class="tunnel-section" id="possibility-tunnel" aria-label="人生探索开场">

@@ -3,7 +3,7 @@
  * Visual reference informed composition only. All geometry and textures below
  * are procedural; no frames or assets from the reference video are included.
  */
-import * as THREE from './vendor/three.module.js';
+import * as THREE from './three.module.js';
 
 const DEPTH = 192;
 const HALF_W = 7;

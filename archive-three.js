@@ -3,7 +3,7 @@
  * All paper, label and grain textures are generated locally; no reference assets.
  * Runtime: locally vendored Three.js (MIT, see vendor/THREE-LICENSE.txt).
  */
-import * as THREE from './vendor/three.module.js';
+import * as THREE from './three.module.js';
 
 const BACKGROUND = '#f7f8f6';
 const FOLDERS = [
