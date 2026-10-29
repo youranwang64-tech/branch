@@ -1,0 +1,10 @@
+
+.ai-progress{display:flex;gap:12px;padding:24px 0}.ai-progress i{width:12px;height:12px;border-radius:50%;background:#8a75a9;animation:ai-breathe 1.4s ease-in-out infinite}.ai-progress i:nth-child(2){animation-delay:.2s}.ai-progress i:nth-child(3){animation-delay:.4s}@keyframes ai-breathe{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-8px)}}@media(prefers-reduced-motion:reduce){.ai-progress i{animation:none;opacity:.7}}
+
+.modal-close[hidden]{display:none!important}
+.ai-node-preview{max-height:42vh;overflow:auto;overscroll-behavior:contain;display:grid;gap:12px;margin:18px 0}
+.ai-node-card{border:1px solid #e1e6de;background:#f6f8f4;border-radius:14px;padding:16px;animation:node-arrive .3s ease-out}
+.ai-node-card small{color:#72806e;font-size:11px}.ai-node-card h3{font-size:17px;margin:10px 0}.ai-node-card p{font-size:13px;line-height:1.8;margin:6px 0}.ai-node-card summary{cursor:pointer;font-size:12px;color:#687260}
+.report-pending{border:1px solid #e1e6de;border-radius:16px;padding:22px}.report-toolbar button:disabled{opacity:.45;cursor:wait}
+@keyframes node-arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.ai-node-card{animation:none}}

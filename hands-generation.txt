@@ -1,0 +1,13 @@
+CIBE 手部开场素材
+生成日期：2026-10-28
+生成模式：内置 image_gen（不是 CLI/API 回退）
+输出：human-robot-hands.png，1536 × 1024，透明 PNG。
+参考：Mariusz Mitkow / MachinaFusion Website
+https://dribbble.com/shots/25472468-MachinaFusion-Website
+来源角色：原视频单帧仅作为姿态与构图参考，输出为重新生成的素材，不是原作者提供的手部资产。
+网页动画：CSS 分离图片左右区域，分别入场与浮动；没有使用原网页源代码或三维手部模型。
+
+最终生成提示词（原文）：
+Use case: compositing / photorealistic website hero asset. Reference image shows two hands in a website, use ONLY the hands as composition reference. Create a high resolution, wide landscape transparent PNG of TWO SEPARATE forearms and hands reaching toward one another, in the exact same relaxed fingertip-reaching gesture as the reference. On the LEFT a photoreal human right hand, natural muted neutral warm skin, forearm enters from left edge, back of hand toward camera, palm down, index finger extends towards center, other fingers softly relaxed and slightly curled, realistic 5 finger anatomy and subtle skin details. On the RIGHT a highly realistic polished silver/chrome robotic left hand and mechanical forearm entering from right edge, articulated slender metallic digits, visible dark joints, cylinders and tendons, index finger points left toward human index finger; remaining fingers relaxed downward like the reference. Both index fingertips stop at x=47% and x=53% respectively, leaving a small clear gap at exact center. Composition: forearms enter opposite image sides around vertical 55%; the two hands and arms form a shallow diagonal flowing horizontal band around the center. Human hand entirely within left half, robot entirely within right half so they can be independently clipped and animated with CSS. Each arm reaches its image edge. Transparent empty upper and lower margins around the hands. Soft neutral studio lighting, crisp realistic texture, refined premium robotics aesthetic, restrained shadows only on the objects. Output ONLY the hands and forearms with genuine transparent alpha background. NO webpage, no logos, no text, no letters, no plants, no background scene, no frame, no UI, no watermark. Keep each hand single and anatomically plausible. Landscape 1536x1024.
+
+transparent_background: true
