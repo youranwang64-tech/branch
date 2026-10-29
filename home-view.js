@@ -1,5 +1,5 @@
 export function homeView(){return `
-<div class="home-page"><aside class="public-preview-note">branch 公开展示版 · 可浏览示例人生，个人 AI 推演尚未开放</aside>
+<div class="home-page"><aside class="public-preview-note">Re:Life 报名已开放 · 提交资料后，到活动现场揭晓人生</aside>
 <header class="home-header">
 <a href="#" class="home-brand" data-action="nav" data-page="home" aria-label="branch 首页"><svg viewBox="0 0 40 26" aria-hidden="true"><path d="M2 17 10 5l9 7-5 8 9-7 7 7 8-13"/></svg><span>branch<span class="brand-sub">by parallax</span></span></a>
 <nav aria-label="网站导航"><a class="pill active" href="#opening"><i>↗</i>起点</a><a class="pill" href="#life-archives">人生档案</a><button class="pill" data-action="nav" data-page="map">人生剧场</button></nav>
