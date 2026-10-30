@@ -1,3 +1,4 @@
+import {randomId} from './identity.js';
 /**
  * CIBE browser-local scenario engine.
  * Original implementation for CIBE, not MiroFish model output.
@@ -48,10 +49,7 @@ const text = (value, fallback, limit = 240) => {
   if (typeof value !== 'string') return fallback;
   return value.trim().slice(0, limit) || fallback;
 };
-function identifier(prefix) {
-  if (!globalThis.crypto?.randomUUID) throw new Error('当前环境无法生成档案标识，请使用现代浏览器。');
-  return `${prefix}-${globalThis.crypto.randomUUID()}`;
-}
+function identifier(prefix) { return `${prefix}-${randomId()}`; }
 function normalizeProfile(input = {}) {
   const profile = input && typeof input === 'object' ? input : {};
   const parsedAge = Number(profile.age);
@@ -492,3 +490,4 @@ export function buildReport(session = {}) {
     active.mode==='ai' ? '本路径由 '+modelName(active.generation.model)+' 根据填写的信息和选择生成。内容是可能的情景，不代表未来事实；节点年龄是叙事时间线。早先的演示路径会保留各自的来源。' : '本路径使用预设情景规则生成，用于流程体验；内容不代表未来事实。');
   return lines.join('\n');
 }
+

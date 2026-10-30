@@ -153,8 +153,8 @@ function getProgress(section) {
 
 function choreography(index, progress, halfWidth, halfHeight, time = 0, still = false) {
   // First turn the pile upright, then let all five personal folders find space.
-  const turn = smooth((progress - .04 - index * .012) / .40);
-  const spread = smooth((progress - .39 - index * .012) / .49);
+  const turn = smooth((progress - .04 - index * .022) / .37);
+  const spread = smooth((progress - .37 - index * .019) / .46);
   const fit = Math.min(1, (halfWidth * 2 - .48) / 11.5);
   const initialScale = Math.min(1.22, halfWidth * .73);
   const centerY = -halfHeight * .25;
@@ -162,12 +162,12 @@ function choreography(index, progress, halfWidth, halfHeight, time = 0, still = 
   const float = still ? 0 : Math.sin(time * .00065 + index * 1.17) * .032;
   return {
     x: lerp((index - 2) * .032, rowX, spread),
-    y: centerY + lerp((index - 2) * .19, [0, .11, .03, -.08, .03][index] * fit, spread) + float,
+    y: centerY + lerp((index - 2) * .19, [0, .24, -.08, .29, .04][index] * fit, spread) + float,
     z: lerp((index - 2) * .105, [0, .12, .24, .10, -.02][index], spread),
     rx: lerp(-1.31, -.035, turn) + (still ? 0 : Math.sin(time * .00035 + index) * .009),
     ry: lerp(-.17 + index * .015, (index - 2) * -.065, spread),
     rz: lerp(-.085 + index * .038, [ .035, -.025, 0, .025, -.035 ][index], spread),
-    scale: lerp(initialScale, fit, spread),
+    scale: lerp(initialScale, fit * [.94, 1.02, .97, 1.04, .93][index], spread),
   };
 }
 
@@ -247,8 +247,8 @@ export function mountArchiveFolders(container) {
   renderer.shadowMap.enabled = false;
   container.append(canvas);
   const scene = new THREE.Scene(); scene.background = new THREE.Color(BACKGROUND);
-  const camera = new THREE.OrthographicCamera(-8, 8, 4.8, -4.8, .1, 60);
-  camera.position.set(0, 0, 15); camera.lookAt(0, 0, 0);
+  const camera = new THREE.OrthographicCamera(-8, 8, 4.8, -4.8, .1, 100);
+  camera.position.set(0, 0, 30); camera.lookAt(0, 0, 0);
   scene.add(new THREE.HemisphereLight(0xffffff, 0xb9b6aa, 2.2));
   const key = new THREE.DirectionalLight(0xffffff, 3.05); key.position.set(-4.5, 7.5, 9);
   scene.add(key);
@@ -259,7 +259,7 @@ export function mountArchiveFolders(container) {
     const shadow = new THREE.Mesh(shadowGeo, material(new THREE.MeshBasicMaterial({
       map: shadowMap, transparent: true, opacity: .075, depthWrite: false, toneMapped: false,
     })));
-    shadow.position.z = -1.55 - index * .005; scene.add(shadow); return shadow;
+    shadow.position.z = -25 - index * .005; scene.add(shadow); return shadow;
   });
   // Project the folder bounds into screen space so the shadow follows its bottom
   // throughout the flat-stack to upright transition, without changing the layout.
@@ -317,6 +317,11 @@ export function mountArchiveFolders(container) {
     scene.add(group); return group;
   });
 
+  // Independent tilts made the flap of one folder cross the next folder's body.
+  // Pack their actual transformed depth bounds, not only their centre points.
+  // Orthographic projection preserves the intended screen layout at every depth.
+  const folderBounds = folders.map(folder => new THREE.Box3().setFromObject(folder));
+  const depthBounds = folders.map(() => new THREE.Box3());
   let destroyed = false, frame = 0, visible = true, fallback = null, width = 1, height = 1;
   let halfWidth = 8, halfHeight = 4.8, progress = getProgress(section), target = progress, last = 0, time = 0;
   function publish(value) {
@@ -327,9 +332,19 @@ export function mountArchiveFolders(container) {
     if (destroyed || fallback || document.hidden || !visible) return;
     const displayedProgress = media.matches ? 1 : progress;
     publish(displayedProgress);
+    const states = folders.map((_, index) => choreography(index, displayedProgress, halfWidth, halfHeight, time, still));
+    let frontDepth = 0;
     folders.forEach((folder, index) => {
-      const state = choreography(index, displayedProgress, halfWidth, halfHeight, time, still);
-      folder.position.set(state.x, state.y, state.z); folder.rotation.set(state.rx, state.ry, state.rz); folder.scale.setScalar(state.scale);
+      const state = states[index];
+      folder.position.set(state.x, state.y, 0); folder.rotation.set(state.rx, state.ry, state.rz); folder.scale.setScalar(state.scale);
+      folder.updateMatrix();
+      const bounds = depthBounds[index].copy(folderBounds[index]).applyMatrix4(folder.matrix);
+      folder.position.z = frontDepth - bounds.min.z;
+      frontDepth += bounds.max.z - bounds.min.z + .045;
+    });
+    folders.forEach((folder, index) => {
+      const state = states[index];
+      folder.position.z -= (frontDepth - .045) / 2;
       folder.updateMatrix();
       let bottom = Infinity, left = Infinity, right = -Infinity;
       for (const corner of shadowCorners) {
